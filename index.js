@@ -6,7 +6,7 @@ const url = 'https://memegen-link-examples-upleveled.netlify.app/';
 const response = await fetch(url);
 const body = await response.text();
 
-let $ = load(body);
+const $ = load(body);
 
 const memeURLs = [];
 
