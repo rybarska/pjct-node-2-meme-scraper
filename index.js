@@ -1,4 +1,3 @@
-import { clear } from 'node:console';
 import fs from 'node:fs';
 import { load } from 'cheerio';
 import fetch from 'node-fetch';
