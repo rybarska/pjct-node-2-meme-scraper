@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { ProgressBar } from '@open-tech-world/cli-progress-bar';
 import { load } from 'cheerio';
 import fetch from 'node-fetch';
 
@@ -23,3 +24,8 @@ for (let i = 0; i < 10; i++) {
   memeURLs.push($('div > a > img')[i].attribs.src);
   await downloadImage(memeURLs[i], `./memes/0${i + 1}.jpg`);
 }
+
+const pBar = new ProgressBar({ prefix: 'Downloading' });
+pBar.run({ value: 0, total: 100 });
+pBar.run({ value: 50, total: 100 });
+pBar.run({ value: 100, total: 100, prefix: 'Download Completed!' });
