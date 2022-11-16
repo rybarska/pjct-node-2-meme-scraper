@@ -3,17 +3,16 @@ import { ProgressBar } from '@open-tech-world/cli-progress-bar';
 import { load } from 'cheerio';
 import fetch from 'node-fetch';
 
-const response = await fetch(
+const linkResponse = await fetch(
   'https://memegen-link-examples-upleveled.netlify.app/',
 );
-const body = await response.text();
+const body = await linkResponse.text();
 
 const downloadImage = async (url, path) => {
-  const response2 = await fetch(url);
-  console.log(response2);
-  const arraybuffer = await response2.arrayBuffer();
-  const buf = Buffer.from(arraybuffer);
-  fs.writeFile(path, buf, () => {});
+  const imageResponse = await fetch(url);
+  const arraybuffer = await imageResponse.arrayBuffer();
+  const buffer = Buffer.from(arraybuffer);
+  fs.writeFile(path, buffer, () => {});
 };
 
 const $ = load(body);
@@ -22,7 +21,7 @@ const memeURLs = [];
 
 for (let i = 0; i < 10; i++) {
   memeURLs.push($('div > a > img')[i].attribs.src);
-  await downloadImage(memeURLs[i], `./memes/0${i + 1}.jpg`);
+  await downloadImage(memeURLs[i], `./memes/${i + 1}.jpg`);
 }
 
 const pBar = new ProgressBar({ prefix: 'Downloading' });
